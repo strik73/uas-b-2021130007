@@ -16,4 +16,9 @@ class Item extends Model
         'harga',
         'stok',
     ];
+
+    public function order_item()
+    {
+        return $this->hasMany(order_item::class);
+    }
 }
