@@ -6,5 +6,9 @@ use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
-    //
+
+public function __invoke(Request $request)
+    {
+        return view('index');
+    }
 }
