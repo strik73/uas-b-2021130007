@@ -12,7 +12,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+        return view('items.index', compact('items'));
     }
 
     /**
@@ -20,7 +21,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('items.create');
     }
 
     /**
@@ -28,7 +30,22 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'id' => 'required|numeric|min:16|max:16',
+            'nama' => 'required|string',
+            'harga' => 'required|numeric|gt:0',
+            'stok' => 'required|numeric|gt:0',
+        ]);
+
+        $transaction = Item::create([
+            'id' => $validated['id'],
+            'nama' => $validated['nama'],
+            'harga' => $validated['harga'],
+            'stok' => $validated['stok'],
+        ]);
+
+        return redirect()->route('items.index')->with('success', 'Item added.');
+
     }
 
     /**
