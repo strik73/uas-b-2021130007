@@ -31,13 +31,13 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'id' => 'required|numeric|min:16|max:16',
+            'id' => 'required|numeric|digits:16',
             'nama' => 'required|string',
             'harga' => 'required|numeric|gt:0',
             'stok' => 'required|numeric|gt:0',
         ]);
 
-        $transaction = Item::create([
+        $item = Item::create([
             'id' => $validated['id'],
             'nama' => $validated['nama'],
             'harga' => $validated['harga'],
@@ -53,7 +53,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return view('items.show',compact('item'));
     }
 
     /**
@@ -61,7 +61,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return view ('items.edit', compact('item'));
     }
 
     /**
@@ -69,7 +69,22 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $validated = $request->validate([
+            'id' => 'required|numeric|digits:16',
+            'nama' => 'required|string',
+            'harga' => 'required|numeric|gt:0',
+            'stok' => 'required|numeric|gt:0',
+        ]);
+
+        $item->update([
+            'id' => $validated['id'],
+            'nama' => $validated['nama'],
+            'harga' => $validated['harga'],
+            'stok' => $validated['stok'],
+        ]);
+
+        return redirect()->route('items.index')->with('success', 'Item updated.');
+
     }
 
     /**
@@ -77,6 +92,7 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+        return redirect()->route('items.index')->with('success', 'Item deleted.');
     }
 }

@@ -17,7 +17,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Item List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('items.index') }}">Item List</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Order List</a></li>
                 </ul>
             </div>
