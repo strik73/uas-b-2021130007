@@ -25,3 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('items', ItemController::class);
 
 Route::get('/order', [OrderController::class,'order'])->name('order');
+Route::post('/order', [OrderController::class, 'createOrder'])->name('createOrder');
