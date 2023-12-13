@@ -3,7 +3,7 @@
 @section('title', 'Items')
 
 @section('content')
-    <div class="mt-4 p-5 bg-black text-white rounded">
+    <div class="mt-4 p-4 bg-black bg-gradient text-white rounded">
         <h1 style="text-align: center">Item List</h1>
     </div>
 
@@ -60,8 +60,8 @@
             @endforelse
         </tbody>
     </table>
-    {{-- <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
         {!! $items->links() !!}
-    </div> --}}
+    </div>
     </div>
 @endsection

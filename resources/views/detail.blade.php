@@ -20,7 +20,7 @@
     <div class="px-2 m-4">
         <p>Nama Item: {{ $detail->nama }}</p>
         <p>Quantity: {{ $detail->quantity }}</p>
-        <p>Quantity: {{ number_format($detail->harga * $detail->quantity) }}</p>
+        <p>Subtotal: Rp. {{ number_format($detail->harga * $detail->quantity) }}</p>
     </div>
         <hr>
     @endforeach

@@ -13,7 +13,7 @@ public function __invoke(Request $request)
     {
         $totalOrders = Order::count();
         $totalItems = Item::count();
-        $orders = Order::all();
+        $orders = Order::paginate(10);
         return view('index', compact('totalOrders','totalItems','orders'));
     }
 }

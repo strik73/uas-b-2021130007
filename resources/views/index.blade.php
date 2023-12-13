@@ -48,8 +48,8 @@
     <h5 class="mb-3">Order List</h5>
     <table class="table table-bordered mb-5">
         <thead>
-            <tr class="table-success">
-                <th scope="col">Order ID</th>
+            <tr class="table-info">
+                <th style="width:15% " class="text-center" scope="col">Order ID</th>
                 <th scope="col">Status Pembayaran</th>
                 <th scope="col">Created At</th>
             </tr>
@@ -57,7 +57,7 @@
         <tbody>
             @forelse ($orders as $order)
                 <tr>
-                    <th scope="row"><a href="{{ route('detail', $order) }}">
+                    <th class="text-center"  scope="row"><a href="{{ route('detail', $order) }}">
                             {{ $order->id }}
                     </th>
                     <td>{{ $order->status }}</td>
@@ -70,5 +70,8 @@
             @endforelse
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {!! $orders->links() !!}
+    </div>
 
 @endsection

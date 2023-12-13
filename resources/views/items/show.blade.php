@@ -4,24 +4,18 @@
 
 @section('content')
 
-    <div class="mt-4 p-5 bg-black text-white rounded">
+    <div class="mt-4 p-5 bg-black bg-gradient text-white rounded">
         <h1>Item's Detail : {{ $item->nama }}</h1>
     </div>
 
     <div>
         <div class="card p-3 m-3 shadow bg-white">
-            <div class="card-body">
-                <h3 class="card-title pb-3">{{ $item->id }}</h3>
-                <p style="font-size:18pt" class="card-text">Nama Produk : {{ $item->nama }}</>
-                </p>
+            <h4 class="card-header pb-4">ID : {{ $item->id }}</h4>
+            <div class="card-body mb-0">
+                <p style="font-size:12pt" class="card-text">Nama Produk : {{ $item->nama }}</p>
+                <p style="font-size:12pt" class="card-text">Harga Satuan : Rp. {{ number_format($item->harga,2) }} </p>
             </div>
-        </div>
-
-        <div class="card m-3 px-3 pb-2 pt-4 bg-white shadow">
-            <h5 class="pb-3">Harga Satuan : Rp. {{ number_format($item->harga,2) }} </h5>
-        </div>
-        <div class="card m-3 p-3 bg-white shadow">
-            <h5>Jumlah Stok : {{ $item->stok }}</h5>
+            <p class="card-footer mb-0   mt-3 pt-3"><b>Jumlah Stok :</b> {{ $item->stok }}</p>
         </div>
     </div>
 

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')-{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js','resources/css/app.css'])
 </head>
 
@@ -18,7 +18,7 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('items.index') }}">Item List</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('order') }}">Order List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('order') }}">Order Form</a></li>
                 </ul>
             </div>
         </div>

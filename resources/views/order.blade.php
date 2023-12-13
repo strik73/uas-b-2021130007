@@ -3,7 +3,7 @@
 @section('title', 'Order Form')
 
 @section('content')
-    <div class="mt-4 p-4 bg-black text-white rounded">
+    <div class="m-4 p-5 bg-black bg-gradient text-white rounded">
         <h1>Buat Order Baru</h1>
     </div>
 
@@ -34,6 +34,7 @@
                         <br>
                         <label for="items[0][item_id]">Item:</label>
                         <select class="form-control" name="items[0][item_id]" required>
+                            <option disabled selected value>-- Select Item --</option>
                             @foreach ($items as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }} | Rp. {{ $item->harga }}</option>
                             @endforeach
@@ -46,7 +47,8 @@
                 <br>
                 <div class="d-flex justify-content-between" id="total-container">
                     <p>Total Harga (Pajak 11%) : <span id="total"><b>Rp. 0</b></span></p>
-                    <button style="width:78px; height:33px" class="btn btn-sm btn-secondary" type="button" onclick="updateTotal()">Hitung</button>
+                    <button style="width:78px; height:33px" class="btn btn-sm btn-secondary" type="button"
+                        onclick="updateTotal()">Hitung</button>
                 </div>
                 <br>
                 <button class="btn btn-success" type="button" onclick="addItem()">Add Item</button>
@@ -67,6 +69,7 @@
                 <hr>
                 <label for="items[${itemCounter}][item_id]">Item:</label>
                 <select class="form-control" name="items[${itemCounter}][item_id]" required>
+                    <option disabled selected value>-- Select Item --</option>
                     @foreach ($items as $item)
                         <option value="{{ $item->id }}">{{ $item->nama }} | Rp. {{ $item->harga }}</option>
                      @endforeach
@@ -80,6 +83,28 @@
             itemCounter++;
 
             updateTotal();
+            updateSelectedOptions();
+        }
+
+        function updateSelectedOptions() {
+            const allSelects = document.querySelectorAll('[name^="items["][name$="[item_id]"]');
+
+            allSelects.forEach((select) => {
+                const selectedValue = select.value;
+
+                if (selectedValue !== "-- Select Item --") {
+                    // Disable the selected option in other dropdowns
+                    allSelects.forEach((otherSelect) => {
+                        if (otherSelect !== select) {
+                            const optionToDisable = otherSelect.querySelector(
+                                `option[value="${selectedValue}"]`);
+                            if (optionToDisable) {
+                                optionToDisable.disabled = true;
+                            }
+                        }
+                    });
+                }
+            });
         }
 
         function updateTotal() {
