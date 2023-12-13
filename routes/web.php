@@ -26,3 +26,4 @@ Route::resource('items', ItemController::class);
 
 Route::get('/order', [OrderController::class,'order'])->name('order');
 Route::post('/order', [OrderController::class, 'createOrder'])->name('createOrder');
+Route::get('/detail/{order}', [OrderController::class,'detailOrder'])->name('detail');

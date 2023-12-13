@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function order(){
+    public function order()
+    {
         $items = Item::all();
         return view('order', compact('items'));
     }
 
     public function createOrder(Request $request)
     {
-       $validated = $request->validate([
+        $validated = $request->validate([
             'status' => 'required|string',
             'items' => 'required|array',
             'items.*.item_id' => 'required|exists:items,id',
@@ -31,14 +33,36 @@ class OrderController extends Controller
             $itemId = $item['item_id'];
             $quantity = $item['quantity'];
 
+            // Cek stok
+            $availableStock = Item::find($itemId)->stok;
+
+            if ($availableStock < $quantity) {
+                return redirect()->route('order')->with('error', 'Stok tidak mencukupi' . $itemId);
+            }
+
+            // Update item stok
             $order->items()->attach($itemId, ['quantity' => $quantity]);
 
-            // Update item stock
             $item = Item::find($itemId);
             $item->stok -= $quantity;
             $item->save();
         }
 
         return redirect()->route('index')->with('success', 'Order Placed.');
+    }
+
+    public function detailOrder(Order $order)
+    {
+        $orderDetails = Order::join('order_item', 'orders.id', '=', 'order_item.order_id')
+            ->join('items', 'order_item.item_id', '=', 'items.id')
+            ->where('orders.id', $order->id)
+            ->get(['order_item.item_id', 'order_item.quantity', 'items.nama', 'items.harga']);
+
+        $total = 0;
+        foreach ($orderDetails as $detail) {
+            $total += $detail->quantity * $detail->harga * 1.11;
+        }
+
+        return view('detail', compact('order','orderDetails','total'));
     }
 }
