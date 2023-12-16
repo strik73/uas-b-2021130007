@@ -4,15 +4,14 @@
 
 @section('content')
 
-    <div class="card bg-dark p-3 m-2 align-items-center">
-        <h3 class="text-light">
-            UAS PBWL
-        </h3>
-        <h4 class="text-light">
-            Yefta Steven Marcellius - 2021130007
-        </h4>
+    <div class="pt-3 m-2 align-items-center">
+        <h1 class="text-black text-center">
+            Order Item
+        </h1>
     </div>
 
+    <hr>
+    <br>
     @if (session()->has('success'))
         <div class="alert alert-success mt-4">
             {{ session()->get('success') }}
@@ -57,7 +56,7 @@
         <tbody>
             @forelse ($orders as $order)
                 <tr>
-                    <th class="text-center"  scope="row"><a href="{{ route('detail', $order) }}">
+                    <th class="text-center" scope="row"><a href="{{ route('detail', $order) }}">
                             {{ $order->id }}
                     </th>
                     <td>{{ $order->status }}</td>

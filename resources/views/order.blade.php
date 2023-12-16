@@ -127,6 +127,8 @@
 
             // Update the total display
             document.getElementById('total').innerHTML = "<strong>Rp. " + total.toFixed(2) + "</strong>";
+
+            updateSelectedOptions();
         }
     </script>
 
